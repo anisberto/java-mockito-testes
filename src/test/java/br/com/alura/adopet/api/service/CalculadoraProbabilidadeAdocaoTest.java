@@ -7,43 +7,64 @@ import br.com.alura.adopet.api.model.Pet;
 import br.com.alura.adopet.api.model.ProbabilidadeAdocao;
 import br.com.alura.adopet.api.model.TipoPet;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculadoraProbabilidadeAdocaoTest {
 
-    /**
-     *
-     * Pattern Triple 'A'
-     * Arrange | ACT (Action) | Assert
-     *
-     * Pattern GWT
-     * Given, When, Then
-     *
-     * **/
-
     @Test
-    @DisplayName("Deve retornar Alta Probabilidade para Pet com Idade e Peso Baixo")
-    void deveRetornarAltaProbabilidadeAltaParaPetComIdadeEPesoBaixo(){
-        CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
-        Abrigo abrigo = new Abrigo(new CadastroAbrigoDto("Abrigo Felix", "62992947507","anisbertoos@gmail.com"));
-        Pet pet = new Pet(new CadastroPetDto(TipoPet.CACHORRO, "Auau", "Siames", 1, "gray", 4.0f), abrigo);
+    void deveriaRetornarProbabilidadeAltaParaPetComIdadeBaixaEPesoBaixo(){
+        //idade 4 anos e 4kg - ALTA
 
-        ProbabilidadeAdocao probabilidadeAdocao = calculadora.calcular(pet);
-        assertEquals(probabilidadeAdocao.ALTA , probabilidadeAdocao);
+        //ARRANGE
+        Abrigo abrigo = new Abrigo(new CadastroAbrigoDto(
+                "Abrigo feliz",
+                "94999999999",
+                "abrigofeliz@email.com.br"
+        ));
+        Pet pet = new Pet(new CadastroPetDto(
+                TipoPet.GATO,
+                "Miau",
+                "Siames",
+                4,
+                "Cinza",
+                4.0f
+        ), abrigo);
+        CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
+
+        //ACT
+        ProbabilidadeAdocao probabilidade = calculadora.calcular(pet);
+
+        //ASSERT
+        Assertions.assertEquals(ProbabilidadeAdocao.ALTA,probabilidade);
     }
 
     @Test
-    @DisplayName("Deve retornar Media Probabilidade para Pet com Idade Alta e Peso Baixo")
-    void deveRetornarAltaProbabilidadeMediaParaPetComIdadeEPesoBaixo(){
-        CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
-        Abrigo abrigo = new Abrigo(new CadastroAbrigoDto("Abrigo Felix", "62992947507","anisbertoos@gmail.com"));
-        Pet pet = new Pet(new CadastroPetDto(TipoPet.CACHORRO, "Auau", "Siames", 15, "gray", 4.0f), abrigo);
+    void deveriaRetornarProbabilidadeMediaParaPetComIdadeAltaEPesoBaixo(){
+        //idade 15 anos e 4kg - MEDIA
 
-        ProbabilidadeAdocao probabilidadeAdocao = calculadora.calcular(pet);
-        assertEquals(probabilidadeAdocao.MEDIA , probabilidadeAdocao);
+        Abrigo abrigo = new Abrigo(new CadastroAbrigoDto(
+                "Abrigo feliz",
+                "94999999999",
+                "abrigofeliz@email.com.br"
+        ));
+        Pet pet = new Pet(new CadastroPetDto(
+                TipoPet.GATO,
+                "Miau",
+                "Siames",
+                15,
+                "Cinza",
+                4.0f
+        ), abrigo);
+        CalculadoraProbabilidadeAdocao calculadora = new CalculadoraProbabilidadeAdocao();
+
+
+        ProbabilidadeAdocao probabilidade = calculadora.calcular(pet);
+
+        Assertions.assertEquals(ProbabilidadeAdocao.MEDIA,probabilidade);
     }
+
+
+
 }

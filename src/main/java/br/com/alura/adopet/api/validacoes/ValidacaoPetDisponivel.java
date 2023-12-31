@@ -10,12 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidacaoPetDisponivel implements ValidacaoSolicitacaoAdocao {
 
-    private final PetRepository petRepository;
-
     @Autowired
-    public ValidacaoPetDisponivel(PetRepository petRepository) {
-        this.petRepository = petRepository;
-    }
+    private PetRepository petRepository;
 
     public void validar(SolicitacaoAdocaoDto dto) {
         Pet pet = petRepository.getReferenceById(dto.idPet());

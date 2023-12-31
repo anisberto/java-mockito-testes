@@ -24,9 +24,7 @@ public class PetService {
                 .toList();
     }
 
-    public Pet cadastrarPet(Abrigo abrigo, CadastroPetDto dto) {
-        Pet saved = repository.save(new Pet(dto, abrigo));
-        return saved;
+    public void cadastrarPet(Abrigo abrigo, CadastroPetDto dto) {
+        repository.save(new Pet(dto, abrigo));
     }
-
 }
